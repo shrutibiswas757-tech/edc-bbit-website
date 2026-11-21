@@ -161,6 +161,8 @@ const INITIAL_EDC_DATA = {
       bio: "4th Year Core Member guiding strategic cell initiatives, event execution, and student startup acceleration.",
       skills: ["Strategic Planning", "Team Leadership", "Operations", "Event Logistics"],
       linkedin: "https://www.linkedin.com/company/ed-cell-bbit/",
+      photo: "assets/images/rajib-karmakar.jpg",
+      photoClass: "avatar-rajib",
       initials: "RK",
       avatarBg: "linear-gradient(135deg, #18181b, #000000)",
       isHighlight: false
@@ -177,6 +179,8 @@ const INITIAL_EDC_DATA = {
       bio: "4th Year Core Member coordinating student innovation pipelines, technical evaluation, and event operations.",
       skills: ["Operations Management", "Event Planning", "Student Coordination", "Logistics"],
       linkedin: "https://www.linkedin.com/company/ed-cell-bbit/",
+      photo: "assets/images/supravat-pal.jpg",
+      photoClass: "avatar-supravat",
       initials: "SP",
       avatarBg: "linear-gradient(135deg, #27272a, #18181b)",
       isHighlight: false
@@ -225,6 +229,8 @@ const INITIAL_EDC_DATA = {
       bio: "3rd Year Core Member leading innovation strategy, hackathon tracks, and technical operational execution.",
       skills: ["Innovation Strategy", "Hackathon Logistics", "Tech Operations", "Problem Solving"],
       linkedin: "https://www.linkedin.com/company/ed-cell-bbit/",
+      photo: "assets/images/avinaba-mitra.jpg",
+      photoClass: "avatar-avinaba",
       initials: "AM",
       avatarBg: "linear-gradient(135deg, #52525b, #18181b)",
       isHighlight: false
@@ -305,6 +311,8 @@ const INITIAL_EDC_DATA = {
       bio: "3rd Year Volunteer assisting with ground logistics, audio-visual technical setups, and event stage flow management.",
       skills: ["Logistics Management", "Technical Setup", "Event Coordination"],
       linkedin: "https://www.linkedin.com/company/ed-cell-bbit/",
+      photo: "assets/images/surojit-roy.jpg",
+      photoClass: "avatar-surojit",
       initials: "SR",
       avatarBg: "linear-gradient(135deg, #18181b, #000000)",
       isHighlight: false
@@ -321,6 +329,8 @@ const INITIAL_EDC_DATA = {
       bio: "3rd Year Volunteer handling media capture, digital certificate administration, and technical coordination.",
       skills: ["Media Operations", "Infrastructure", "Technical Coordination"],
       linkedin: "https://www.linkedin.com/company/ed-cell-bbit/",
+      photo: "assets/images/kuntal-mondal.jpg",
+      photoClass: "avatar-kuntal",
       initials: "KM",
       avatarBg: "linear-gradient(135deg, #27272a, #09090b)",
       isHighlight: false
@@ -435,6 +445,8 @@ const INITIAL_EDC_DATA = {
       linkedin: "https://www.linkedin.com/company/ed-cell-bbit/",
       github: "https://github.com/shrutibiswas757-tech",
       email: "shrutibiswas757@gmail.com",
+      photo: "assets/images/shruti-biswas.jpg",
+      photoClass: "avatar-shruti",
       avatarBg: "linear-gradient(135deg, #18181b, #000000)",
       initials: "SB",
       isHighlight: true

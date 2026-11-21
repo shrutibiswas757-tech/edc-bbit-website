@@ -16,7 +16,7 @@ const INITIAL_EDC_DATA = (typeof window !== 'undefined' && window.INITIAL_EDC_DA
 
 // LocalStorage Keys
 const STORAGE_KEYS = {
-  TEAM: 'edc_bbit_team_members_v2',
+  TEAM: 'edc_bbit_team_members_v3',
   APPLICATIONS: 'edc_bbit_student_apps_v1'
 };
 
@@ -59,7 +59,13 @@ function initStorage() {
 
   // Validate that the cached team contains the official 18-member roster
   if (parsed && Array.isArray(parsed) && parsed.length >= 18 && parsed.some(m => m.name === 'Rajib Karmakar')) {
-    state.teamMembers = parsed;
+    state.teamMembers = parsed.map(m => {
+      const seed = INITIAL_EDC_DATA.coreMembers.find(s => s.id === m.id);
+      if (seed && seed.photo) {
+        return { ...m, photo: seed.photo, photoClass: seed.photoClass };
+      }
+      return m;
+    });
   } else {
     state.teamMembers = [...INITIAL_EDC_DATA.coreMembers];
     try {
@@ -293,7 +299,7 @@ function renderTeam() {
         <div class="member-header">
           <div class="member-avatar" style="${member.photo ? '' : `background: ${member.avatarBg || 'linear-gradient(135deg, #18181b, #000000)'}`}">
             ${member.photo 
-              ? `<img src="${member.photo}" alt="${escapeHtml(member.name)}" onerror="this.onerror=null; this.parentElement.innerText='${member.initials || 'ED'}';">` 
+              ? `<img src="${member.photo}" alt="${escapeHtml(member.name)}" class="${member.photoClass || ''}" onerror="this.onerror=null; this.parentElement.innerText='${member.initials || 'ED'}';">` 
               : (member.initials || getInitials(member.name))}
           </div>
           <div class="member-title-info">
