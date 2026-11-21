@@ -47,16 +47,24 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 function initStorage() {
   const storedTeam = localStorage.getItem(STORAGE_KEYS.TEAM);
+  let parsed = null;
   if (storedTeam) {
     try {
-      state.teamMembers = JSON.parse(storedTeam);
+      parsed = JSON.parse(storedTeam);
     } catch (e) {
       console.error('Error parsing stored team:', e);
-      state.teamMembers = [...INITIAL_EDC_DATA.coreMembers];
+      parsed = null;
     }
+  }
+
+  // Validate that the cached team contains the official 18-member roster
+  if (parsed && Array.isArray(parsed) && parsed.length >= 18 && parsed.some(m => m.name === 'Rajib Karmakar')) {
+    state.teamMembers = parsed;
   } else {
     state.teamMembers = [...INITIAL_EDC_DATA.coreMembers];
-    localStorage.setItem(STORAGE_KEYS.TEAM, JSON.stringify(state.teamMembers));
+    try {
+      localStorage.setItem(STORAGE_KEYS.TEAM, JSON.stringify(state.teamMembers));
+    } catch (e) {}
   }
 
   const storedApps = localStorage.getItem(STORAGE_KEYS.APPLICATIONS);
