@@ -16,7 +16,7 @@ const INITIAL_EDC_DATA = (typeof window !== 'undefined' && window.INITIAL_EDC_DA
 
 // LocalStorage Keys
 const STORAGE_KEYS = {
-  TEAM: 'edc_bbit_team_members_v1',
+  TEAM: 'edc_bbit_team_members_v2',
   APPLICATIONS: 'edc_bbit_student_apps_v1'
 };
 
@@ -218,15 +218,38 @@ function renderTeam() {
 
   const filtered = state.teamMembers.filter(member => {
     // Filter matching
-    const matchesFilter = state.activeFilter === 'all' || 
-      (member.category && member.category.toLowerCase().includes(state.activeFilter.toLowerCase())) ||
-      (member.role && member.role.toLowerCase().includes(state.activeFilter.toLowerCase()));
+    const filter = (state.activeFilter || 'all').toLowerCase();
+    let matchesFilter = false;
+
+    if (filter === 'all') {
+      matchesFilter = true;
+    } else if (filter === 'core') {
+      matchesFilter = (member.designation && member.designation.toLowerCase().includes('core')) || 
+                      (member.role && member.role.toLowerCase().includes('core')) ||
+                      (member.category && member.category.toLowerCase().includes('core'));
+    } else if (filter === 'volunteer') {
+      matchesFilter = (member.designation && member.designation.toLowerCase().includes('volunteer')) || 
+                      (member.role && member.role.toLowerCase().includes('volunteer')) ||
+                      (member.category && member.category.toLowerCase().includes('volunteer'));
+    } else if (filter === '4th') {
+      matchesFilter = member.year && member.year.toLowerCase().includes('4th');
+    } else if (filter === '3rd') {
+      matchesFilter = member.year && member.year.toLowerCase().includes('3rd');
+    } else if (filter === '2nd') {
+      matchesFilter = member.year && member.year.toLowerCase().includes('2nd');
+    } else {
+      matchesFilter = (member.category && member.category.toLowerCase().includes(filter)) ||
+                      (member.role && member.role.toLowerCase().includes(filter));
+    }
 
     // Search query matching
     const query = state.searchQuery;
     const matchesSearch = !query ||
       member.name.toLowerCase().includes(query) ||
       member.role.toLowerCase().includes(query) ||
+      (member.designation && member.designation.toLowerCase().includes(query)) ||
+      (member.contact && member.contact.toLowerCase().includes(query)) ||
+      (member.year && member.year.toLowerCase().includes(query)) ||
       (member.department && member.department.toLowerCase().includes(query)) ||
       (member.skills && member.skills.some(s => s.toLowerCase().includes(query)));
 
@@ -244,18 +267,23 @@ function renderTeam() {
   }
 
   grid.innerHTML = filtered.map(member => {
-    const isDevHighlight = member.id === 'shruti-biswas' || member.role.toLowerCase().includes('developer');
+    const isDevHighlight = member.id === 'shruti-biswas' || (member.role && member.role.toLowerCase().includes('developer'));
+    const isCore = (member.designation && member.designation.toLowerCase().includes('core')) || (member.role && member.role.toLowerCase().includes('core'));
     return `
       <div class="team-card ${isDevHighlight ? 'featured-developer' : ''}">
         ${isDevHighlight ? `
           <div class="featured-ribbon">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            Developer & Organizer
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Lead Developer &amp; Organizer
           </div>
-        ` : ''}
+        ` : (isCore ? `
+          <div class="member-role-badge">Core Member</div>
+        ` : `
+          <div class="member-role-badge volunteer-badge">Volunteer</div>
+        `)}
 
         <div class="member-header">
-          <div class="member-avatar" style="${member.photo ? '' : `background: ${member.avatarBg || 'linear-gradient(135deg, #1e3a8a, #3b82f6)'}`}">
+          <div class="member-avatar" style="${member.photo ? '' : `background: ${member.avatarBg || 'linear-gradient(135deg, #18181b, #000000)'}`}">
             ${member.photo 
               ? `<img src="${member.photo}" alt="${escapeHtml(member.name)}" onerror="this.onerror=null; this.parentElement.innerText='${member.initials || 'ED'}';">` 
               : (member.initials || getInitials(member.name))}
@@ -263,18 +291,25 @@ function renderTeam() {
           <div class="member-title-info">
             <h4 class="member-name">${escapeHtml(member.name)}</h4>
             <span class="member-role">${escapeHtml(member.role)}</span>
-            <span class="member-dept">${escapeHtml(member.department || 'BBIT')} ${member.year ? `• ${escapeHtml(member.year)}` : ''}</span>
+            <span class="member-dept">${escapeHtml(member.department || 'BBIT')} ${member.year ? `• <strong>${escapeHtml(member.year)}</strong>` : ''}</span>
           </div>
         </div>
 
-        <p class="member-bio">${escapeHtml(member.bio || 'Core organizer facilitating student innovation and events at EDC BBIT.')}</p>
+        <p class="member-bio">${escapeHtml(member.bio || 'Active team member facilitating student innovation, hackathons, and operations at EDC BBIT.')}</p>
 
         <div class="member-skills-list">
           ${(member.skills || []).map(skill => `<span class="skill-tag">${escapeHtml(skill)}</span>`).join('')}
         </div>
 
         <div class="member-card-footer">
-          <span style="font-size: 0.78rem; color: var(--text-dim); text-transform: uppercase; font-weight: 600;">${escapeHtml(member.category || 'Core Team')}</span>
+          <div class="member-contact-wrap">
+            ${member.contact ? `
+              <a href="tel:+91${escapeHtml(member.contact)}" class="member-contact-pill" title="Call ${escapeHtml(member.name)}">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                +91 ${escapeHtml(member.contact)}
+              </a>
+            ` : `<span style="font-size: 0.78rem; color: var(--text-dim); text-transform: uppercase; font-weight: 600;">${escapeHtml(member.designation || 'Member')}</span>`}
+          </div>
           <div class="member-socials">
             ${member.linkedin ? `
               <a href="${escapeHtml(member.linkedin)}" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="LinkedIn Profile" aria-label="LinkedIn Profile">

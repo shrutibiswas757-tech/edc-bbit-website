@@ -47,19 +47,39 @@ python -m http.server 8000
 
 ## 🏛️ Leadership & Faculty Mentorship
 
-- **Ashok Shaw Sir** — **President, EDC BBIT** (Institution's Innovation Council & Faculty Leadership)
-- **Yusuf Alam** — **Convener, EDC BBIT** (EDC Administration & Student Engagement)
+- **Dr. Prof. Ashok Kumar Shaw** — **President, EDC BBIT & IIC**
+  - *Dean (Research & Development)*, BBIT
+  - *Professor & Head of Department (HOD)*, Mathematics & Basic Science and Humanities (BSH)
+  - Specialization: Reliability Optimization, Fuzzy Mathematics, Inventory Systems, R&D Incubation
+- **Dr. Prof. Munshi Yusuf Alam** — **Convener, EDC BBIT**
+  - *Associate Professor*, Department of Computer Science & Engineering (Cyber Security)
+  - Specialization: Pervasive Computing, IoT, Machine Learning, Cyber Security
 
 ---
 
-## 👥 Core Committee Roster
+## 👥 EDC & IIC Member Roster 2026
 
-- **Shruti Biswas** — Developer & Organizer (CSE, Core Committee Lead)
-- **Akash Kumar** — Student Lead & President (Coders' Club BBIT)
-- **Abhishek Kumar Singh** — Operations & Outreach Lead
-- **Bithika Purkait** — Creative & Design Lead
-- **Kuntal Mandal** — Technical Coordinator & Media
-- **Shadma Yunus** — Anchor & Public Relations
+### Core Members
+- **Rajib Karmakar** — 4th Year | Core Member (📞 9153136004)
+- **Supravat Pal** — 4th Year | Core Member (📞 7439928855)
+- **Tirtha Shankar Khan** — 4th Year | Core Member (📞 9382087189)
+- **Arva Jatin** — 3rd Year | Core Member (📞 8240811834)
+- **Avinaba Mitra** — 3rd Year | Core Member (📞 9734094131)
+
+### Volunteers & Student Organizers
+- **Shruti Biswas** — 2nd Year | Volunteer & Lead Developer (📞 7044411911)
+- **Aritroy Kundu** — 3rd Year | Volunteer (📞 9382211382)
+- **Navneet Singh** — 3rd Year | Volunteer (📞 7070444574)
+- **Ankur Pal** — 3rd Year | Volunteer (📞 9875415054)
+- **Khushi Kumari** — 3rd Year | Volunteer (📞 9608875808)
+- **Surojit Roy** — 3rd Year | Volunteer (📞 7980488817)
+- **Kuntal Mondal** — 3rd Year | Volunteer (📞 6294402163)
+- **Sudip Pal** — 2nd Year | Volunteer (📞 9641718883)
+- **Abhradeep Basu** — 2nd Year | Volunteer (📞 6290037905)
+- **Avnish Kumar** — 2nd Year | Volunteer (📞 7044313170)
+- **Nitika Kumari** — 2nd Year | Volunteer (📞 7980460545)
+- **Khushi Srivastav** — 2nd Year | Volunteer (📞 8240744408)
+- **Anushree Jana** — 2nd Year | Volunteer (📞 8670218593)
 
 ---
 
